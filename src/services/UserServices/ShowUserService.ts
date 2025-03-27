@@ -6,12 +6,22 @@ type Params = {
   attr?: string[];
 };
 
-async function ShowUserService({ where = {}, attr = [] }: Params) {
-  try {
-    const options: FindOptions = {};
+export const DEFAULT_USER_ATTR = [
+  "id",
+  "email",
+  "firstName",
+  "lastName",
+  "role",
+  "photo",
+  "date_birth",
+];
 
-    if (where) options["where"] = { ...where };
-    if (attr?.length) options["attributes"] = attr;
+async function ShowUserService({
+  where = {},
+  attr = DEFAULT_USER_ATTR,
+}: Params) {
+  try {
+    const options: FindOptions = { where, attributes: attr };
 
     const user = await UserModel.findOne(options);
 

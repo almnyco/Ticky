@@ -1,37 +1,20 @@
-import { Request, Response } from "express";
-import { serializeUser } from "@/helpers/serializeUser";
-import bcrypt from "bcrypt";
-import { v4 as uuidv4 } from "uuid";
 import CreateUserService from "@/services/UserServices/CreateUserService";
 import ShowUserService from "@/services/UserServices/ShowUserService";
-import isEmail from "validator/lib/isEmail";
-import { signToken } from "@/services/AuthServices.ts/AuthService";
-
-const validate = (data, signin: boolean = false) => {
-  if (!data?.email || !isEmail(data?.email)) {
-    return { error: "Insert a existent and valid e-mail." };
-  }
-
-  if (signin) {
-    if (!data?.password) return { error: "Insert or check your password." };
-
-    return;
-  }
-
-  if (!data?.password || !data?.passwordRepeat) {
-    return { error: "Insert or check your password." };
-  }
-
-  if (data?.password !== data?.passwordRepeat) {
-    return { error: "Passwords do not match, please check and try again." };
-  }
-};
+import { CredentialValidation } from "@/helpers/validation";
+import { serializeUser } from "@/helpers/serializeUser";
+import { Request, Response } from "express";
+import bcrypt from "bcrypt";
+import {
+  generatePassword,
+  generateUserUUID,
+  signToken,
+} from "@/services/AuthServices.ts/AuthService";
 
 const signUp = async (req: Request, res: Response) => {
   const data = req.body;
   const password = req.body.password;
 
-  const v = validate(data);
+  const v = CredentialValidation(data, { validatePasswordCreation: true });
   if (v?.error) return res.status(400).json(v);
 
   const user = serializeUser(data);
@@ -45,10 +28,10 @@ const signUp = async (req: Request, res: Response) => {
       .status(409)
       .json({ error: "There is already a user with this email." });
 
-  const salt = await bcrypt.genSalt(11);
-  const passwordHash = await bcrypt.hash(password, salt);
+  const passwordHash = await generatePassword(password);
+  const userUUID = generateUserUUID();
 
-  user["id"] = uuidv4();
+  user["id"] = userUUID;
   user["password"] = passwordHash;
 
   const created = await CreateUserService({ data: user });
@@ -56,21 +39,21 @@ const signUp = async (req: Request, res: Response) => {
   if (!created)
     return res
       .status(400)
-      .json({ error: "There is already a user with this email." });
+      .json({ error: "An error occurred while creating the user." });
 
-  return res.status(200).json({ message: "Usuário criado com sucesso!" });
+  return res.status(200).json({ message: "User created successfully!" });
 };
 
 const signIn = async (req: Request, res: Response) => {
   const data = req.body;
 
-  const v = validate(data, true);
+  const v = CredentialValidation(data, { validatePassword: true });
   if (v?.error) return res.status(400).json(v);
 
   // Check if user exists
   const exists = await ShowUserService({
     where: { email: data.email },
-    attr: ["id", "email", "password"],
+    attr: ["id", "email", "role", "password", "firstName"],
   });
 
   if (!exists)
@@ -84,11 +67,11 @@ const signIn = async (req: Request, res: Response) => {
       error: "Invalid password, please check and try again.",
     });
 
-  const token = signToken(exists);
+  const accessToken = signToken(exists);
 
-  console.log(token);
-
-  return res.status(200).json({ message: "Logged in successfully!" });
+  return res
+    .status(200)
+    .json({ message: "Logged in successfully!", accessToken });
 };
 
 export default { signUp, signIn };

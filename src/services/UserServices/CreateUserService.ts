@@ -9,11 +9,9 @@ async function CreateUserService({ data }: Params) {
   try {
     const user = await UserModel.create(data);
 
-    if (!user) return;
-
     return user;
   } catch (error) {
-    console.error("Erro ao buscar usuário", error);
+    console.error("Erro ao criar usuário: ", error);
   }
 }
 
