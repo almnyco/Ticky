@@ -1,5 +1,4 @@
 import { JWT_SECRET } from "@/constants";
-import { v4 as uuidv4 } from "uuid";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
@@ -55,11 +54,4 @@ export const generatePassword = async (password: string) => {
   const passwordHash = await bcrypt.hash(password, salt);
 
   return passwordHash;
-};
-
-// Function to generate a user UUID
-export const generateUserUUID = () => {
-  const userUUID = uuidv4();
-
-  return userUUID;
 };

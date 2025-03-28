@@ -1,6 +1,7 @@
 import AuthMiddleware from "@/middlewares/AuthMiddleware";
 import { AuthRouter } from "./AuthRoutes";
 import { UserRouter } from "./UserRoutes";
+import { TaskRouter } from "./TaskRoutes";
 import { Router } from "express";
 
 const router = Router();
@@ -11,6 +12,7 @@ router.get("/", async (_req, res) => {
 
 router.use("/api", AuthRouter);
 router.use("/api", AuthMiddleware, UserRouter);
+router.use("/api", AuthMiddleware, TaskRouter);
 
 // router.post("/signin", (req, res) => {
 //     const { name, password } = req.body;

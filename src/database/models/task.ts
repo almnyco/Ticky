@@ -6,16 +6,24 @@ class Task extends Model {
   id!: string;
   title!: string;
   status!: string;
+  startDate!: Date;
+  dueDate!: Date;
+  archived!: boolean;
+  priority!: string;
+  completeDate!: Date;
   description!: string;
-  permission!: number[];
+  assignedTo!: number[];
   createdAt!: Date;
   updatedAt!: Date;
+  deletedAt!: Date;
 }
 
 Task.init(
   {
     id: {
       type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
       primaryKey: true,
     },
     userId: {
@@ -39,8 +47,27 @@ Task.init(
       type: DataTypes.STRING(25),
       allowNull: true,
     },
-    permission: {
+    priority: {
+      type: DataTypes.STRING(25),
+      allowNull: false,
+    },
+    archived: {
+      type: DataTypes.BOOLEAN,
+    },
+    assigned_to: {
       type: DataTypes.ARRAY(DataTypes.INTEGER),
+      allowNull: true,
+    },
+    start_date: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    due_date: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    complete_date: {
+      type: DataTypes.DATE,
       allowNull: true,
     },
     createdAt: {
@@ -50,6 +77,10 @@ Task.init(
     updatedAt: {
       type: DataTypes.DATE,
       allowNull: false,
+    },
+    deletedAt: {
+      type: DataTypes.DATE,
+      allowNull: true,
     },
   },
   {

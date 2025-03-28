@@ -4,7 +4,7 @@ export default {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.sequelize.query(`
       CREATE TABLE "Users" (
-        id UUID PRIMARY KEY,
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
         firstName VARCHAR(255),
         lastName VARCHAR(255),
         photo TEXT,

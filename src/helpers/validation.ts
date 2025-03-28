@@ -11,6 +11,10 @@ type CredentialDataType = {
   passwordRepeat: string;
 };
 
+type TaskDataType = {
+  title: string;
+};
+
 export const CredentialValidation = (
   data: CredentialDataType,
   options: CredentialOptionsType = {},
@@ -34,4 +38,16 @@ export const CredentialValidation = (
       return { error: "Passwords do not match, please check and try again." };
     }
   }
+};
+
+export const TaskValidation = (data: TaskDataType) => {
+  if (!data?.title) {
+    return { error: "Enter a title for this task." };
+  }
+
+  if (data?.title?.length > 100)
+    return {
+      error:
+        "The title exceeds the 100 character limit. Please reduce the length and try again.",
+    };
 };

@@ -6,7 +6,6 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import {
   generatePassword,
-  generateUserUUID,
   signToken,
 } from "@/services/AuthServices.ts/AuthService";
 
@@ -18,6 +17,7 @@ const signUp = async (req: Request, res: Response) => {
   if (v?.error) return res.status(400).json(v);
 
   const user = serializeUser(data);
+
   // Check if exists an user with this email
   const exists = await ShowUserService({
     where: { email: user.email },
@@ -29,9 +29,6 @@ const signUp = async (req: Request, res: Response) => {
       .json({ error: "There is already a user with this email." });
 
   const passwordHash = await generatePassword(password);
-  const userUUID = generateUserUUID();
-
-  user["id"] = userUUID;
   user["password"] = passwordHash;
 
   const created = await CreateUserService({ data: user });

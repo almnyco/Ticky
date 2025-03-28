@@ -4,11 +4,9 @@ import ShowUserService from "../services/UserServices/ShowUserService";
 import { CredentialValidation } from "@/helpers/validation";
 import { serializeUser } from "@/helpers/serializeUser";
 import { Request, Response } from "express";
-import {
-  generatePassword,
-  generateUserUUID,
-} from "../services/AuthServices.ts/AuthService";
+import { generatePassword } from "../services/AuthServices.ts/AuthService";
 import UpdateUserService from "@/services/UserServices/UpdateUserService";
+import RemoveUserService from "@/services/UserServices/RemoveUserService";
 
 const create = async (req: Request, res: Response) => {
   const data = req.body;
@@ -28,9 +26,6 @@ const create = async (req: Request, res: Response) => {
   const user = serializeUser(data);
 
   const passwordHash = await generatePassword(user.password);
-  const userUUID = generateUserUUID();
-
-  user["id"] = userUUID;
   user["password"] = passwordHash;
 
   const created = await CreateUserService({ data: user });
@@ -85,13 +80,15 @@ const update = async (req: Request, res: Response) => {
 const show = async (req: Request, res: Response) => {
   const id = req.params?.id;
 
-  if (!id) return res.status(400).json({ error: "Invalid user ID." });
+  if (!id)
+    return res.status(400).json({ error: "Please enter a valid user ID." });
 
   const user = await ShowUserService({ where: { id } });
 
-  console.log(user);
+  if (!user)
+    return res.status(404).json({ error: "There is no user with this id." });
 
-  return res.status(200).json();
+  return res.status(200).json(user);
 };
 
 const list = async (req: Request, res: Response) => {
@@ -101,7 +98,28 @@ const list = async (req: Request, res: Response) => {
 };
 
 const remove = async (req: Request, res: Response) => {
-  return res.status(200).json({});
+  const id = req.params?.id;
+
+  if (!id)
+    return res.status(400).json({ error: "Please enter a valid user ID." });
+
+  const exists = await ShowUserService({ where: { id } });
+
+  if (!exists)
+    return res.status(404).json({ error: "There is no user with this id." });
+
+  const deleted = await RemoveUserService({
+    where: {
+      id,
+    },
+  });
+
+  if (!deleted)
+    return res
+      .status(400)
+      .json({ error: "An error occurred while deleting the user." });
+
+  return res.status(200).json({ message: "User deleted successfully!" });
 };
 
 const UserController = {
