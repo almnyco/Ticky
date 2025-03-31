@@ -2,17 +2,17 @@ import AuthMiddleware from "@/middlewares/AuthMiddleware";
 import { AuthRouter } from "./AuthRoutes";
 import { UserRouter } from "./UserRoutes";
 import { TaskRouter } from "./TaskRoutes";
-import { Router } from "express";
+import { Express } from "express";
 
-const router = Router();
+export function routes(app: Express) {
+  app.get("/", async (_req, res) => {
+    res.send("OK!");
+  });
 
-router.get("/", async (_req, res) => {
-  res.send("OK!");
-});
-
-router.use("/api", AuthRouter);
-router.use("/api", AuthMiddleware, UserRouter);
-router.use("/api", AuthMiddleware, TaskRouter);
+  app.use("/api", AuthRouter);
+  app.use("/api", AuthMiddleware, UserRouter);
+  app.use("/api", AuthMiddleware, TaskRouter);
+}
 
 // router.post("/signin", (req, res) => {
 //     const { name, password } = req.body;
@@ -44,5 +44,3 @@ router.use("/api", AuthMiddleware, TaskRouter);
 
 //     res.status(200).json({ message: "Authenticated!" });
 // });
-
-export { router };

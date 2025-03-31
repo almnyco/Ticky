@@ -7,7 +7,9 @@ import bcrypt from "bcrypt";
 import {
   generatePassword,
   signToken,
+  verifyToken,
 } from "@/services/AuthServices.ts/AuthService";
+import { JWT_REFRESH_EXPIRES } from "@/constants";
 
 const signUp = async (req: Request, res: Response) => {
   const data = req.body;
@@ -65,10 +67,73 @@ const signIn = async (req: Request, res: Response) => {
     });
 
   const accessToken = signToken(exists);
+  const refreshToken = signToken(exists, { expiresIn: JWT_REFRESH_EXPIRES });
 
-  return res
-    .status(200)
-    .json({ message: "Logged in successfully!", accessToken });
+  res.cookie("refreshToken", refreshToken, {
+    maxAge: 60 * 60 * 1000,
+    sameSite: "strict",
+    httpOnly: true,
+    secure: true,
+  });
+
+  await exists.update({ accessToken: refreshToken });
+
+  return res.status(200).json({ accessToken });
 };
 
-export default { signUp, signIn };
+export const signOut = async (req: Request, res: Response) => {
+  const token = req.cookies.refreshToken;
+
+  if (!token) return res.status(403).json({ error: "Refresh Token not found" });
+
+  const verified = verifyToken({ token });
+
+  if (verified?.error) return res.status(401).json({ error: verified?.error });
+
+  // Check if user exists
+  const exists = await ShowUserService({
+    where: { accessToken: token },
+    attr: ["id", "email", "role", "password", "firstName"],
+  });
+
+  if (exists) {
+    await exists.update({ accessToken: null });
+  }
+
+  // Removing Token from cookies
+  res.clearCookie("refreshToken");
+  return res.status(200).json({ message: "Logout realizado com sucesso!" });
+};
+
+const refresh = async (req: Request, res: Response) => {
+  const token = req.cookies.refreshToken;
+
+  if (!token)
+    return res.status(403).json({ error: "Refresh Token not found." });
+
+  const verified = verifyToken({ token });
+
+  if (verified?.error) return res.status(401).json({ error: verified?.error });
+
+  // Check if user exists
+  const exists = await ShowUserService({
+    where: { accessToken: token },
+    attr: ["id", "email", "role", "password", "firstName"],
+  });
+
+  if (!exists) return res.status(401).json({ error: "Invalid Refresh Token." });
+
+  const newAccessToken = signToken(exists);
+  const refreshToken = signToken(exists, { expiresIn: JWT_REFRESH_EXPIRES });
+
+  res.cookie("refreshToken", refreshToken, {
+    maxAge: 60 * 60 * 1000,
+    sameSite: "strict",
+    httpOnly: true,
+    secure: true,
+  });
+
+  return res.status(200).json({ accessToken: newAccessToken });
+};
+
+export default { signUp, signIn, signOut, refresh };

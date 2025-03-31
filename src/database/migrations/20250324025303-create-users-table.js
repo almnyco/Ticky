@@ -11,7 +11,7 @@ export default {
         role VARCHAR(25),
         email VARCHAR(255),
         password TEXT,
-        password_expiresAt TIMESTAMP NOT NULL,
+        accessToken TEXT,
         date_birth TIMESTAMP
       );
     `);

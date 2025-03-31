@@ -1,16 +1,28 @@
-import { router } from "./routes";
+import cookieParser from "cookie-parser";
+import { routes } from "./routes";
 import express from "express";
 import cors from "cors";
 
-const server = express();
+// Server port
+const PORT = 3000;
 
-server.use(
+const app = express();
+
+app.use(cookieParser());
+app.use(
   cors({
+    credentials: true,
     origin: process.env.CORS?.split(";") || [],
   }),
 );
-server.use(express.json());
+app.use(express.json());
 
-server.use(router);
+function main() {
+  app.listen(PORT, () => {
+    console.log("SERVIDOR LIGADO!");
+  });
 
-export { server };
+  routes(app);
+}
+
+export { main };

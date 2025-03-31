@@ -11,7 +11,7 @@ class User extends Model {
   role!: string;
   password!: string;
   date_birth!: Date;
-  password_expiresAt!: string;
+  accessToken!: string;
   createdAt!: Date;
   updatedAt!: Date;
 
@@ -56,8 +56,8 @@ User.init(
       type: DataTypes.DATE,
       allowNull: true,
     },
-    password_expiresAt: {
-      type: DataTypes.DATE,
+    accessToken: {
+      type: DataTypes.TEXT,
       allowNull: true,
     },
     createdAt: {
