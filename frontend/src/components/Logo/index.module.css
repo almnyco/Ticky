@@ -1,0 +1,10 @@
+.logo_wrapper {
+  gap: 1rem;
+  width: 100%;
+  display: flex;
+  user-select: none;
+  flex-direction: row;
+  align-items: center;
+  height: fit-content;
+  justify-content: flex-start;
+}

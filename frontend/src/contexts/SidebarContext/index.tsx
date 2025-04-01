@@ -41,8 +41,6 @@ function SidebarContextProvider({ children }: SidebarContextProviderProps) {
     [isOpen, handleOpenSidebar]
   );
 
-  console.log(contextValue.isOpen);
-
   return (
     <SidebarContext.Provider value={contextValue}>
       {children}

@@ -1,25 +1,16 @@
 "use client";
 
-import styled from "styled-components";
 import React from "react";
 import Logo from "../Logo";
 import Avatar from "../Avatar";
-
-const HeaderWrapper = styled.div`
-  height: fit-content;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-`;
+import styles from "./index.module.css";
 
 function Header() {
   return (
-    <HeaderWrapper>
+    <div className={styles.header_wrapper}>
       <Logo />
       <Avatar />
-    </HeaderWrapper>
+    </div>
   );
 }
 

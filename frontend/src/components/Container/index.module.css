@@ -1,0 +1,10 @@
+.container_wrapper {
+  gap: 1rem;
+  width: 100%;
+  height: 100%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}

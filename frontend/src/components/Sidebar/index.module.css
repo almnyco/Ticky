@@ -1,0 +1,124 @@
+.sidebar_wrapper {
+  max-width: fit-content;
+  min-width: 275px;
+  height: 100%;
+  gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+
+  padding: 1.5rem;
+  min-height: 100%;
+  border-radius: 0.75rem;
+  background-color: #171717;
+  transition:
+    max-width 2s ease-out,
+    min-width 2s ease-out;
+}
+
+.sidebar_wrapper > nav ul {
+  gap: 0.75rem;
+  display: flex;
+  list-style: none;
+  flex-direction: column;
+  transition: opacity 0.3s ease-out;
+}
+
+@media screen and (min-width: 1024px) {
+  .sidebar_wrapper {
+    max-width: 150px;
+  }
+}
+
+.sidebar_wrapper_closed {
+  min-width: fit-content;
+  max-width: fit-content;
+}
+
+.sidebar_wrapper_closed > .sidebar_menu_item {
+  min-width: fit-content;
+  max-width: fit-content;
+}
+
+.sidebar_wrapper_closed .sidebar_menu_name {
+  display: none;
+  opacity: 0;
+}
+
+.sidebar_wrapper_closed:hover {
+  min-width: 275px;
+  position: fixed;
+  height: calc(100svh - 2rem);
+  min-height: calc(100svh - 2rem);
+
+  & .sidebar_menu_item {
+    min-width: fit-content;
+    max-width: 100%;
+  }
+
+  & .sidebar_menu_name {
+    display: initial;
+    opacity: 1;
+  }
+
+  & .sidebar_menu_item {
+    max-width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+.sidebar_header {
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: row;
+}
+
+.sidebar_menu_item {
+  gap: 1rem;
+  width: 100%;
+  height: 46px;
+  display: flex;
+  padding: 1rem;
+  min-width: 46px;
+  font-size: 14px;
+  max-height: 46px;
+  user-select: none;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 0.5rem;
+  justify-content: flex-start;
+  background-color: #202020;
+}
+
+.sidebar_menu_item:hover {
+  transition: ease-out 0.2s;
+  scale: 1.0251;
+}
+
+.sidebar_menu_icon {
+  display: flex;
+  height: 100%;
+  max-width: 46px;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar_menu_icon svg path {
+  stroke: #8a8a8a;
+}
+
+.sidebar_menu_name {
+  width: 100%;
+  color: #8a8a8a;
+}
+
+.sidebar_menu_item_selected .sidebar_menu_name {
+  color: #ededed;
+}
+
+.sidebar_menu_item_selected .sidebar_menu_icon > svg path {
+  stroke: #ededed;
+}

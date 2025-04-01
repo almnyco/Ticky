@@ -1,0 +1,14 @@
+.sidebar_menu {
+  display: flex;
+  min-width: 42px;
+  min-height: 42px;
+  align-items: center;
+  transition: all 0.2s;
+  border-radius: 12px;
+  justify-content: center;
+
+  &:hover {
+    background-color: #30303070;
+    cursor: pointer;
+  }
+}

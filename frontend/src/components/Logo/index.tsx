@@ -2,28 +2,17 @@
 
 import React from "react";
 import Image from "next/image";
-import styled from "styled-components";
+import styles from "./index.module.css";
 
 type LogoType = {
   showTitle?: boolean;
   showIcon?: boolean;
 };
-
-const LogoWrapper = styled.div`
-  gap: 1rem;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  height: fit-content;
-  justify-content: flex-start;
-`;
-
 function Logo({ showTitle = true, showIcon = true }: LogoType) {
   if (!showTitle && !showIcon) return <></>;
 
   return (
-    <LogoWrapper>
+    <div className={styles.logo_wrapper}>
       {showIcon && (
         <Image
           src="/favicon.ico"
@@ -34,7 +23,7 @@ function Logo({ showTitle = true, showIcon = true }: LogoType) {
         />
       )}
       {showTitle && <h2>Ticky</h2>}
-    </LogoWrapper>
+    </div>
   );
 }
 

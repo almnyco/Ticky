@@ -1,0 +1,9 @@
+.root_page_wrapper {
+  height: 100%;
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+  align-items: flex-start;
+  font-family: var(--font-inter-sans);
+}

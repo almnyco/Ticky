@@ -1,25 +1,14 @@
 "use client";
 
 import React from "react";
-import styled from "styled-components";
+import styles from "./index.module.css";
 
 type ContainerType = {
   children: React.ReactNode;
 };
 
-const ContainerWrapper = styled.div`
-  gap: 1rem;
-  width: 100%;
-  height: 100%;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-`;
-
 function Container({ children }: ContainerType) {
-  return <ContainerWrapper>{children}</ContainerWrapper>;
+  return <div className={styles.container_wrapper}>{children}</div>;
 }
 
 export default Container;

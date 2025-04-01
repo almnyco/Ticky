@@ -1,18 +1,10 @@
 "use client";
 
 import React from "react";
-import styled from "styled-components";
-
-const AvatarWrapper = styled.div`
-  width: 42px;
-  height: 42px;
-  padding: 1rem;
-  border-radius: 999px;
-  background-color: aliceblue;
-`;
+import styles from "./index.module.css";
 
 function Avatar() {
-  return <AvatarWrapper />;
+  return <div className={styles.avatar_wrapper} />;
 }
 
 export default Avatar;
