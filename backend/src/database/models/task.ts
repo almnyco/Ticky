@@ -5,6 +5,7 @@ import User from "./user";
 class Task extends Model {
   id!: string;
   title!: string;
+  userId!: string;
   status!: string;
   startDate!: Date;
   dueDate!: Date;
@@ -91,4 +92,5 @@ Task.init(
 
 User.hasMany(Task, { foreignKey: "userId", as: "Tasks" });
 Task.belongsTo(User, { foreignKey: "userId", as: "Users" });
+
 export default Task;
