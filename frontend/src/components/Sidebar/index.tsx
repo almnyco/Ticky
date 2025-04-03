@@ -2,6 +2,7 @@
 
 import React from "react";
 import Logo from "../Logo";
+import Link from "next/link";
 import styles from "./index.module.css";
 import SidebarMenu from "../SidebarMenu";
 import { usePathname } from "next/navigation";
@@ -11,7 +12,6 @@ import GearIcon from "/public/icons/gear.svg";
 import CheckIcon from "/public/icons/check.svg";
 import PersonIcon from "/public/icons/person.svg";
 import useSidebarContext from "@/src/hooks/useSidebarContext";
-import Link from "next/link";
 
 const menu = [
   {
@@ -62,11 +62,11 @@ function Sidebar() {
       className={`${styles.sidebar_wrapper} ${!isOpen && styles.sidebar_wrapper_closed} `}
     >
       <div className={styles.sidebar_header}>
-        {isOpen && <Logo />}
+        <Logo className={styles.sidebar_header_logo} />
         <SidebarMenu />
       </div>
-      <nav>
-        <ul>
+      <nav className={styles.sidebar_menu_list}>
+        <ul className={styles.sidebar_menu_list}>
           {menu.map((m, i) => (
             <li key={`menu_item_${i}`}>
               <Link

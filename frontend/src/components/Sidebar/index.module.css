@@ -1,37 +1,43 @@
 .sidebar_wrapper {
-  max-width: fit-content;
+  max-width: 275px;
   min-width: 275px;
+  width: 100%;
   height: 100%;
   gap: 1.5rem;
   display: flex;
+  align-items: flex-start;
   flex-direction: column;
 
   padding: 1.5rem;
   min-height: 100%;
   border-radius: 0.75rem;
   background-color: #171717;
-  transition:
-    max-width 2s ease-out,
-    min-width 2s ease-out;
+  transition: all 0.4s ease;
 }
 
-.sidebar_wrapper > nav ul {
+.sidebar_menu_list {
   gap: 0.75rem;
+  width: 100%;
   display: flex;
   list-style: none;
   flex-direction: column;
-  transition: opacity 0.3s ease-out;
 }
 
-@media screen and (min-width: 1024px) {
+/* @media screen and (min-width: 1024px) {
   .sidebar_wrapper {
-    max-width: 150px;
+    max-width: 90px;
   }
-}
+} */
 
 .sidebar_wrapper_closed {
-  min-width: fit-content;
-  max-width: fit-content;
+  min-width: 0px;
+  max-width: 90px;
+}
+
+.sidebar_wrapper_closed > .sidebar_header > .sidebar_header_logo {
+  width: 0;
+  opacity: 0;
+  max-width: 0;
 }
 
 .sidebar_wrapper_closed > .sidebar_menu_item {
@@ -45,14 +51,20 @@
 }
 
 .sidebar_wrapper_closed:hover {
-  min-width: 275px;
-  position: fixed;
+  width: 100%;
+  max-width: 275px;
+  align-items: flex-start;
   height: calc(100svh - 2rem);
   min-height: calc(100svh - 2rem);
 
+  & .sidebar_header > .sidebar_header_logo {
+    opacity: 1;
+    max-width: fit-content;
+  }
+
   & .sidebar_menu_item {
-    min-width: fit-content;
-    max-width: 100%;
+    width: 100%;
+    max-width: 275px;
   }
 
   & .sidebar_menu_name {
@@ -68,6 +80,7 @@
 
 .sidebar_header {
   width: 100%;
+  transition: all 1s ease;
   align-items: center;
   justify-content: space-between;
   display: flex;
@@ -81,6 +94,9 @@
   height: 46px;
   display: flex;
   padding: 1rem;
+  overflow: hidden;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
   min-width: 46px;
   font-size: 14px;
   max-height: 46px;
@@ -113,6 +129,7 @@
 .sidebar_menu_name {
   width: 100%;
   color: #8a8a8a;
+  white-space: nowrap;
 }
 
 .sidebar_menu_item_selected .sidebar_menu_name {

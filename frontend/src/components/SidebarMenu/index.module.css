@@ -3,8 +3,8 @@
   min-width: 42px;
   min-height: 42px;
   align-items: center;
-  transition: all 0.2s;
   border-radius: 12px;
+  transition: all 0.4s;
   justify-content: center;
 
   &:hover {

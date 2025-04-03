@@ -1,18 +1,19 @@
 "use client";
 
-import React from "react";
+import React, { ComponentProps } from "react";
 import Image from "next/image";
 import styles from "./index.module.css";
 
 type LogoType = {
   showTitle?: boolean;
   showIcon?: boolean;
-};
-function Logo({ showTitle = true, showIcon = true }: LogoType) {
+} & ComponentProps<"div">;
+
+function Logo({ showTitle = true, showIcon = true, ...props }: LogoType) {
   if (!showTitle && !showIcon) return <></>;
 
   return (
-    <div className={styles.logo_wrapper}>
+    <div className={`${styles.logo_wrapper} ${props?.className}`}>
       {showIcon && (
         <Image
           src="/favicon.ico"

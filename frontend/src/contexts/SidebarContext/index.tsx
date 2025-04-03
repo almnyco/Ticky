@@ -11,7 +11,7 @@ import React, {
 type SidebarContextProps = {
   isOpen: boolean;
   handleOpenSidebar: () => void;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 type SidebarContextProviderProps = {
@@ -21,7 +21,7 @@ type SidebarContextProviderProps = {
 export const SidebarContext = createContext({} as SidebarContextProps);
 
 function SidebarContextProvider({ children }: SidebarContextProviderProps) {
-  const [isOpen, setOpen] = useState(() => {
+  const [isOpen, setIsOpen] = useState(() => {
     if (typeof window !== "undefined") {
       return localStorage.getItem("sidebar-isopen") === "true";
     }
@@ -33,11 +33,11 @@ function SidebarContextProvider({ children }: SidebarContextProviderProps) {
   }, [isOpen]);
 
   const handleOpenSidebar = useCallback(() => {
-    setOpen(!isOpen);
+    setIsOpen(!isOpen);
   }, [isOpen]);
 
   const contextValue = useMemo<SidebarContextProps>(
-    () => ({ isOpen, setOpen, handleOpenSidebar }),
+    () => ({ isOpen, setIsOpen: setIsOpen, handleOpenSidebar }),
     [isOpen, handleOpenSidebar]
   );
 
