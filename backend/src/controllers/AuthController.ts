@@ -71,9 +71,10 @@ const signIn = async (req: Request, res: Response) => {
 
   res.cookie("refreshToken", refreshToken, {
     maxAge: 60 * 60 * 1000,
-    sameSite: "strict",
+    sameSite: "lax",
     httpOnly: true,
-    secure: true,
+    path: "/",
+    secure: process.env.NODE_ENV === "production",
   });
 
   await exists.update({ accessToken: refreshToken });
@@ -128,9 +129,10 @@ const refresh = async (req: Request, res: Response) => {
 
   res.cookie("refreshToken", refreshToken, {
     maxAge: 60 * 60 * 1000,
-    sameSite: "strict",
+    sameSite: "lax",
     httpOnly: true,
-    secure: true,
+    path: "/",
+    secure: process.env.NODE_ENV === "production",
   });
 
   return res.status(200).json({ accessToken: newAccessToken });

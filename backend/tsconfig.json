@@ -5,6 +5,7 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "strict": true,
+    "allowJs": true,
     "moduleResolution": "node",
     "noImplicitAny": true,
     "esModuleInterop": true,
@@ -18,20 +19,6 @@
     },
     "forceConsistentCasingInFileNames": true
   },
-  "include": [
-    "src",
-    "backend/src/index.ts",
-    "global.d.ts",
-    "backend/src/services/UserServices",
-    "backend/src/services/TaskServices",
-    "backend/src/services/AuthServices.ts",
-    "backend/src/helpers",
-    "backend/src/database/config.js",
-    "backend/src/database/models",
-    "backend/src/database/migrations",
-    "backend/src/server.ts",
-    "backend/src/constants.ts",
-    "backend/src/utils"
-  ],
+  "include": ["src", "src/index.ts", "global.d.ts"],
   "exclude": ["node_modules", "dist"]
 }

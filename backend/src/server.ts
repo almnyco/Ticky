@@ -4,7 +4,7 @@ import express from "express";
 import cors from "cors";
 
 // Server port
-const PORT = 3000;
+const PORT = 9000;
 
 const app = express();
 
