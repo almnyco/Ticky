@@ -1,4 +1,4 @@
-import { verifyToken } from "@/services/AuthServices.ts/AuthService";
+import { verifyToken } from "@/services/AuthServices/AuthService";
 import { NextFunction, Request, Response } from "express";
 
 // Auth middleware

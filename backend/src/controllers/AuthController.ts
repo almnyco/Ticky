@@ -2,14 +2,22 @@ import CreateUserService from "@/services/UserServices/CreateUserService";
 import ShowUserService from "@/services/UserServices/ShowUserService";
 import { CredentialValidation } from "@/helpers/validation";
 import { serializeUser } from "@/helpers/serializeUser";
-import { Request, Response } from "express";
+import { CookieOptions, Request, Response } from "express";
 import bcrypt from "bcrypt";
 import {
   generatePassword,
   signToken,
   verifyToken,
-} from "@/services/AuthServices.ts/AuthService";
+} from "@/services/AuthServices/AuthService";
 import { JWT_REFRESH_EXPIRES } from "@/constants";
+
+const cookieOptions = {
+  maxAge: 60 * 60 * 1000,
+  sameSite: "lax",
+  httpOnly: true,
+  path: "/",
+  secure: process.env.NODE_ENV === "production",
+} as CookieOptions;
 
 const signUp = async (req: Request, res: Response) => {
   const data = req.body;
@@ -69,13 +77,11 @@ const signIn = async (req: Request, res: Response) => {
   const accessToken = signToken(exists);
   const refreshToken = signToken(exists, { expiresIn: JWT_REFRESH_EXPIRES });
 
-  res.cookie("refreshToken", refreshToken, {
-    maxAge: 60 * 60 * 1000,
-    sameSite: "lax",
-    httpOnly: true,
-    path: "/",
-    secure: process.env.NODE_ENV === "production",
+  res.cookie("accessToken", accessToken, {
+    ...cookieOptions,
+    maxAge: 60 * 15,
   });
+  res.cookie("refreshToken", refreshToken, cookieOptions);
 
   await exists.update({ accessToken: refreshToken });
 
@@ -127,13 +133,11 @@ const refresh = async (req: Request, res: Response) => {
   const newAccessToken = signToken(exists);
   const refreshToken = signToken(exists, { expiresIn: JWT_REFRESH_EXPIRES });
 
-  res.cookie("refreshToken", refreshToken, {
-    maxAge: 60 * 60 * 1000,
-    sameSite: "lax",
-    httpOnly: true,
-    path: "/",
-    secure: process.env.NODE_ENV === "production",
+  res.cookie("accessToken", newAccessToken, {
+    ...cookieOptions,
+    maxAge: 60 * 15,
   });
+  res.cookie("refreshToken", refreshToken, cookieOptions);
 
   return res.status(200).json({ accessToken: newAccessToken });
 };

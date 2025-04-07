@@ -4,7 +4,7 @@ import ShowUserService from "../services/UserServices/ShowUserService";
 import { CredentialValidation } from "@/helpers/validation";
 import { serializeUser } from "@/helpers/serializeUser";
 import { Request, Response } from "express";
-import { generatePassword } from "../services/AuthServices.ts/AuthService";
+import { generatePassword } from "../services/AuthServices/AuthService";
 import UpdateUserService from "@/services/UserServices/UpdateUserService";
 import RemoveUserService from "@/services/UserServices/RemoveUserService";
 
