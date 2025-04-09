@@ -33,10 +33,6 @@ yarn-error.log*
 *.sqlite3
 database.sqlite
 
-# Arquivos do Sequelize
-src/config/config.json
-src/config/database.json
-
 # Cache do TypeScript
 *.tsbuildinfo
 
