@@ -1,25 +1,12 @@
-"use client";
-
+import { cookies } from "next/headers";
 import styles from "./page.module.css";
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
-import Container from "../components/Container";
-import useLoadedApplication from "../hooks/useLoadedApplication";
+import { redirect } from "next/navigation";
 
-function App({ children }: { children: React.ReactNode }) {
-  const isLoaded = useLoadedApplication();
+function App() {
+  const accessToken = cookies().get("accessToken");
+  if (!accessToken) redirect("/signin");
 
-  if (!isLoaded) return <></>;
-
-  return (
-    <div className={styles.root_page_wrapper}>
-      <Sidebar />
-      <Container>
-        <Header />
-        {children}
-      </Container>
-    </div>
-  );
+  return <div className={styles.root_page_wrapper}>Olá!</div>;
 }
 
 export default App;

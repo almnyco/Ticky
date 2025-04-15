@@ -5,6 +5,7 @@ import cors from "cors";
 
 // Server port
 const PORT = 9000;
+const HOST = "0.0.0.0";
 
 const app = express();
 
@@ -18,7 +19,7 @@ app.use(
 app.use(express.json());
 
 function main() {
-  app.listen(PORT, () => {
+  app.listen(PORT, HOST, () => {
     console.log("SERVIDOR LIGADO!");
   });
 

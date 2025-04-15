@@ -1,0 +1,9 @@
+.input_wrapper {
+  min-width: 300px;
+  padding: 1rem;
+  width: 100%;
+  border-radius: 6px;
+  margin: 0;
+  background-color: transparent;
+  border: 1px solid #808080;
+}

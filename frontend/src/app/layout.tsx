@@ -1,4 +1,3 @@
-import AppLayout from "../contexts/AppLayout";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 import "./globals.css";
@@ -13,16 +12,14 @@ export const metadata: Metadata = {
   description: "Creating by Nycollas",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
     <html lang="pt">
-      <body className={`${interSans.variable}`}>
-        <AppLayout>{children}</AppLayout>
-      </body>
+      <body className={`${interSans.variable}`}>{children}</body>
     </html>
   );
 }

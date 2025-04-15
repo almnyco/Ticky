@@ -38,6 +38,10 @@
   width: 0;
   opacity: 0;
   max-width: 0;
+
+  & h2 {
+    visibility: hidden;
+  }
 }
 
 .sidebar_wrapper_closed > .sidebar_menu_item {
@@ -60,6 +64,10 @@
   & .sidebar_header > .sidebar_header_logo {
     opacity: 1;
     max-width: fit-content;
+
+    & h2 {
+      visibility: visible;
+    }
   }
 
   & .sidebar_menu_item {

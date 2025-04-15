@@ -59,7 +59,9 @@ function Sidebar() {
 
   return (
     <div
-      className={`${styles.sidebar_wrapper} ${!isOpen && styles.sidebar_wrapper_closed} `}
+      className={`${styles.sidebar_wrapper} ${
+        !isOpen && styles.sidebar_wrapper_closed
+      } `}
     >
       <div className={styles.sidebar_header}>
         <Logo className={styles.sidebar_header_logo} />
@@ -71,7 +73,9 @@ function Sidebar() {
             <li key={`menu_item_${i}`}>
               <Link
                 href={m.path}
-                className={`${styles.sidebar_menu_item} ${getIsSamePath(m.path) && styles.sidebar_menu_item_selected}`}
+                className={`${styles.sidebar_menu_item} ${
+                  getIsSamePath(m.path) && styles.sidebar_menu_item_selected
+                }`}
               >
                 <div className={styles.sidebar_menu_icon}>{m.icon}</div>
                 <p className={styles.sidebar_menu_name}>{m.name}</p>
