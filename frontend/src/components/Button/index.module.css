@@ -1,9 +1,17 @@
-.input_wrapper {
-  min-width: 300px;
-  padding: 1rem;
+.button_wrapper {
+  padding: 0.9rem;
   width: 100%;
   border-radius: 6px;
   margin: 0;
-  background-color: transparent;
-  border: 1px solid #808080;
+  border: 0;
+  background-color: #9747ff;
+  border: 1px solid #9747ff;
+
+  transition: all 0.2s;
+}
+
+.button_wrapper:hover {
+  cursor: pointer;
+  transform: scale(1.01);
+  border: 1px solid #af79ff;
 }

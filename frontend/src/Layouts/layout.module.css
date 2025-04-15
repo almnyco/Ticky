@@ -1,9 +1,10 @@
 .root_page_wrapper {
   height: 100%;
-  padding: 1rem;
+  padding: 1.5rem;
   display: flex;
   flex-direction: row;
   justify-items: center;
   align-items: flex-start;
+  overflow: auto;
   font-family: var(--font-inter-sans);
 }

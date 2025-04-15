@@ -1,22 +1,31 @@
 import styles from "./index.module.css";
-import React, { Fragment } from "react";
+import React from "react";
 
 type InputProps = {
+  fullWidth?: boolean;
   label?: string;
   name: string;
 } & React.ComponentProps<"input">;
 
-function Input({ label, name, ...props }: InputProps) {
+function Input({ label, fullWidth = false, name, ...props }: InputProps) {
   return (
-    <Fragment>
-      {label && <label htmlFor={`input_label_${name}`}>{label}</label>}
+    <div
+      className={`${styles.input_wrapper}  ${
+        fullWidth && styles.input_full_width
+      }`}
+    >
       <input
         id={`input_label_${name}`}
         type="text"
-        className={styles.input_wrapper}
+        className={styles.input}
         {...props}
-      ></input>
-    </Fragment>
+      />
+      {label && (
+        <label htmlFor={`input_label_${name}`} className={styles.input_label}>
+          {label}
+        </label>
+      )}
+    </div>
   );
 }
 

@@ -1,9 +1,7 @@
 import styles from "./index.module.css";
 import React from "react";
 
-type InputProps = {
-  text?: string;
-} & React.ComponentProps<"button">;
+type InputProps = {} & React.ComponentProps<"button">;
 
 function Button({ children, ...props }: InputProps) {
   return (
