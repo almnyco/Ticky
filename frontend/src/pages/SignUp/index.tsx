@@ -10,14 +10,13 @@ import Button from "@/src/components/Button";
 function SignUp() {
   return (
     <div className={styles.form_wrapper}>
-      {/* <div className={styles.container}> */}
       <form className={styles.form}>
         <div className={styles.form_header}>
           <Logo />
           <div className={styles.form_text_header}>
-            <h1 className={styles.form_text_title}>Olá, seja bem-vindo!</h1>
+            <h1 className={styles.form_text_title}>Criar uma nova conta</h1>
             <h4 className={styles.form_text_subtitle}>
-              Insira seus dados abaixo para continuar!
+              Preencha os campos abaixo para continuar!
             </h4>
           </div>
         </div>
@@ -70,7 +69,7 @@ function SignUp() {
           </p>
         </div>
       </form>
-      {/* </div> */}
+      {/* <div className={styles.carousel} /> */}
     </div>
   );
 }

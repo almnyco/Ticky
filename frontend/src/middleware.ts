@@ -9,13 +9,13 @@ export function middleware(request: NextRequest) {
   const isAuthRoute = ['/signin', '/signup', 'forgot-password'].includes(request.nextUrl.pathname)
 
 
-  if (accessToken && isAuthRoute) {
-    return Response.redirect(new URL('/home', request.url))
-  }
+  // if (accessToken && isAuthRoute) {
+  //   return Response.redirect(new URL('/home', request.url))
+  // }
 
-  if (!accessToken && !isAuthRoute) {
-    return Response.redirect(new URL('/signin', request.url))
-  }
+  // if (!accessToken && !isAuthRoute) {
+  //   return Response.redirect(new URL('/signin', request.url))
+  // }
 
   return NextResponse.next()
 }
