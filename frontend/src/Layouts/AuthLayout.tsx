@@ -1,3 +1,5 @@
+"use client";
+
 import useLoadedApplication from "../hooks/useLoadedApplication";
 import styles from "./layout.module.css";
 import React from "react";

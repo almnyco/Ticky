@@ -12,7 +12,7 @@ import {
 import { JWT_REFRESH_EXPIRES } from "@/constants";
 
 const cookieOptions = {
-  maxAge: 60 * 60 * 1000,
+  maxAge: 1000 * 60 * 60,
   sameSite: "lax",
   httpOnly: true,
   path: "/",
@@ -79,7 +79,7 @@ const signIn = async (req: Request, res: Response) => {
 
   res.cookie("accessToken", accessToken, {
     ...cookieOptions,
-    maxAge: 60 * 15,
+    maxAge: 1000 * 60 * 15,
   });
   res.cookie("refreshToken", refreshToken, cookieOptions);
 
@@ -135,7 +135,7 @@ const refresh = async (req: Request, res: Response) => {
 
   res.cookie("accessToken", newAccessToken, {
     ...cookieOptions,
-    maxAge: 60 * 15,
+    maxAge: 1000 * 60 * 15,
   });
   res.cookie("refreshToken", refreshToken, cookieOptions);
 

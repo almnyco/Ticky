@@ -1,13 +1,13 @@
 .button_wrapper {
-  padding: 0.9rem;
-  width: 100%;
-  border-radius: 6px;
   margin: 0;
   border: 0;
+  width: 100%;
+  padding: 0.9rem;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: all 0.2s;
   background-color: #9747ff;
   border: 1px solid #9747ff;
-
-  transition: all 0.2s;
 }
 
 .button_wrapper:hover {

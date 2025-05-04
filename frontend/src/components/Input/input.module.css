@@ -42,3 +42,17 @@
     width: 100%;
   }
 }
+
+.input_helper_text {
+  order: 3;
+  font-size: 12px;
+  font-weight: 600;
+  color: #808080;
+}
+
+.input_error {
+  order: 4;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ef4444;
+}

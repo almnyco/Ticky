@@ -1,4 +1,6 @@
-import styles from "./index.module.css";
+"use client";
+
+import styles from "./button.module.css";
 import React from "react";
 
 type InputProps = {} & React.ComponentProps<"button">;

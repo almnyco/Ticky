@@ -3,13 +3,17 @@
 import React from "react";
 import Logo from "../Logo";
 import Avatar from "../Avatar";
-import styles from "./index.module.css";
+import styles from "./header.module.css";
+import Button from "../Button";
 
 function Header() {
   return (
     <div className={styles.header_wrapper}>
       <Logo />
-      <Avatar />
+      <div className={styles.header_actions}>
+        <Button>aaaa</Button>
+        <Avatar />
+      </div>
     </div>
   );
 }

@@ -83,3 +83,9 @@
     color: #9747ff;
   }
 }
+
+.form_error {
+  font-size: 12px;
+  font-weight: 600;
+  color: #ef4444;
+}
