@@ -99,6 +99,7 @@ const list = async (req: Request, res: Response) => {
 
 const remove = async (req: Request, res: Response) => {
   const id = req.params?.id;
+  const signedUserId = req.data?.id;
 
   if (!id)
     return res.status(400).json({ error: "Please enter a valid user ID." });
@@ -107,6 +108,9 @@ const remove = async (req: Request, res: Response) => {
 
   if (!exists)
     return res.status(404).json({ error: "There is no user with this id." });
+
+  if (exists.id === signedUserId)
+    return res.status(403).json({ error: "You cannot delete yourself." });
 
   const deleted = await RemoveUserService({
     where: {

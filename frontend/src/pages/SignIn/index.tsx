@@ -4,10 +4,12 @@ import React from "react";
 import Link from "next/link";
 import styles from "./index.module.css";
 import Logo from "@/src/components/Logo";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Input from "@/src/components/Input";
 import Button from "@/src/components/Button";
+import { SignInSchema } from "@/src/lib/user/schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import AuthProvider from "@/src/providers/AuthProvider";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 interface FormData {
   email: string;
@@ -19,31 +21,19 @@ function SignIn() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>();
+  } = useForm<FormData>({ resolver: zodResolver(SignInSchema) });
   const { signin } = AuthProvider();
 
-  const [credentials, setCredentials] = React.useState({
-    email: "",
-    password: "",
-  });
-
   const [error, setError] = React.useState(undefined);
-  const [fieldErrors, setFieldError] = React.useState<{
-    email?: string[] | undefined;
-    password?: string[] | undefined;
-  }>({
-    email: undefined,
-    password: undefined,
-  });
+
+  console.log(errors);
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    setFieldError({ email: undefined, password: undefined });
     setError(undefined);
 
     const res = await signin(data.email, data.password);
 
-    if (res?.errors || res?.error) {
-      if (res?.errors) setFieldError(res.errors);
+    if (res?.error) {
       if (res?.error) setError(res?.error);
       return;
     }
@@ -66,12 +56,7 @@ function SignIn() {
             id="email"
             type="email"
             label="E-mail"
-            // name="email"
-            // onChange={(e) =>
-            //   setCredentials({ ...credentials, email: e.target.value })
-            // }
-            // value={credentials.email}
-            // errors={fieldErrors?.email}
+            error={errors?.email?.message}
             {...register("email", { required: true })}
             placeholder="Insira seu e-mail"
           />
@@ -79,12 +64,7 @@ function SignIn() {
             id="password"
             label="Senha"
             type="password"
-            // name="password"
-            // onChange={(e) =>
-            //   setCredentials({ ...credentials, password: e.target.value })
-            // }
-            // value={credentials.password}
-            // errors={fieldErrors.password}
+            error={errors?.password?.message}
             {...register("password", { required: true })}
             placeholder="Insira sua senha"
           />
@@ -95,7 +75,9 @@ function SignIn() {
           {error && <p className={styles.form_error}>{error}</p>}
         </div>
         <div className={styles.form_submit}>
-          <Button type="submit">Sign In</Button>
+          <Button type="submit" isLoading={isSubmitting}>
+            Sign In
+          </Button>
           <p className={styles.form_text}>Ou</p>
           <p className={styles.form_text}>
             Ainda nao possui uma conta?{" "}

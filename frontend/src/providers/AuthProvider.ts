@@ -3,7 +3,7 @@
 import { redirect } from 'next/navigation';
 import { User } from '../contexts/AuthContext';
 import useAuthContext from '../hooks/useAuthContext'
-import { SignInSchema } from '../pages/SignIn/schema';
+import { SignInSchema } from "@/src/lib/user/schema";
 
 function AuthProvider() {
   const { setUser } = useAuthContext();

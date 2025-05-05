@@ -7,13 +7,13 @@ type InputProps = {
   fullWidth?: boolean;
   helperText?: string;
   label?: string;
-  errors?: string[];
+  error?: string;
   name: string;
 } & React.ComponentProps<"input">;
 
 function Input({
   label,
-  errors,
+  error,
   helperText,
   fullWidth = false,
   name,
@@ -38,7 +38,7 @@ function Input({
         </label>
       )}
       {helperText && <p className={styles.input_helper_text}>{helperText}</p>}
-      {errors && <p className={styles.input_error}>{errors}</p>}
+      {error && <p className={styles.input_error}>{error}</p>}
     </div>
   );
 }

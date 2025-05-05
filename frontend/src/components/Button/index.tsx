@@ -1,14 +1,15 @@
 "use client";
 
 import styles from "./button.module.css";
+import Loading from "../Loading/index";
 import React from "react";
 
-type InputProps = {} & React.ComponentProps<"button">;
+type InputProps = { isLoading?: boolean } & React.ComponentProps<"button">;
 
-function Button({ children, ...props }: InputProps) {
+function Button({ children, isLoading = false, ...props }: InputProps) {
   return (
-    <button className={styles.button_wrapper} {...props}>
-      {children}
+    <button className={styles.button_wrapper} title="button" {...props}>
+      {isLoading ? <Loading /> : children}
     </button>
   );
 }

@@ -59,7 +59,7 @@ function SignUp() {
           </div>
         </div>
         <div className={styles.form_submit}>
-          <Button type="submit">Sign In</Button>
+          <Button type="submit">Sign Up</Button>
           <p className={styles.form_text}>Ou</p>
           <p className={styles.form_text}>
             Já possuí uma conta?{" "}
