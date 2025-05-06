@@ -2,7 +2,9 @@
 
 import React from "react";
 import Link from "next/link";
-import styles from "./index.module.css";
+// import styles from "./index.module.css";
+import styles from "@/src/styles/auth.page.module.css";
+
 import Logo from "@/src/components/Logo";
 import Input from "@/src/components/Input";
 import Button from "@/src/components/Button";
@@ -26,8 +28,6 @@ function SignIn() {
 
   const [error, setError] = React.useState(undefined);
 
-  console.log(errors);
-
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     setError(undefined);
 
@@ -41,18 +41,19 @@ function SignIn() {
 
   return (
     <div className={styles.form_wrapper}>
-      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-        <div className={styles.form_header}>
-          <Logo />
-          <div className={styles.form_text_header}>
-            <h1 className={styles.form_text_title}>Olá, seja bem-vindo!</h1>
-            <h4 className={styles.form_text_subtitle}>
-              Insira seus dados abaixo para continuar!
-            </h4>
-          </div>
+      <div className={styles.form_header}>
+        <Logo />
+        <div className={styles.form_text_header}>
+          <h1 className={styles.form_text_title}>Olá, seja bem-vindo!</h1>
+          <h4 className={styles.form_text_subtitle}>
+            Insira seus dados abaixo para continuar!
+          </h4>
         </div>
+      </div>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <div className={styles.form_inputs}>
           <Input
+            // fullWidth
             id="email"
             type="email"
             label="E-mail"
@@ -61,6 +62,7 @@ function SignIn() {
             placeholder="Insira seu e-mail"
           />
           <Input
+            // fullWidth
             id="password"
             label="Senha"
             type="password"
@@ -80,7 +82,7 @@ function SignIn() {
           </Button>
           <p className={styles.form_text}>Ou</p>
           <p className={styles.form_text}>
-            Ainda nao possui uma conta?{" "}
+            Ainda não possui uma conta?{" "}
             <Link href="/signup" className={styles.form_text}>
               <span>Criar uma nova</span>
             </Link>

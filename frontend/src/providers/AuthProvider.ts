@@ -3,7 +3,7 @@
 import { redirect } from 'next/navigation';
 import { User } from '../contexts/AuthContext';
 import useAuthContext from '../hooks/useAuthContext'
-import { SignInSchema } from "@/src/lib/user/schema";
+import { CreateUserSchema, SignInSchema } from "@/src/lib/user/schema";
 
 function AuthProvider() {
   const { setUser } = useAuthContext();
@@ -30,8 +30,24 @@ function AuthProvider() {
     redirect("/home");
   };
 
-  const signup = () => {
+  const signup = async (formData) => {
+    const result = CreateUserSchema.safeParse(formData);
 
+    if (!result.success) return { errors: result.error.flatten().fieldErrors }
+
+    const data = await fetch('http://localhost:9000/api/signup', {
+      body: JSON.stringify(formData),
+      method: 'post',
+      headers: {
+        "Content-Type": 'application/json',
+      },
+      credentials: 'include'
+    }).then((res) => res.json());
+    console.log(data)
+
+    if (data?.error) return { error: data?.error }
+
+    redirect("/signin");
   }
 
   const signout = () => {

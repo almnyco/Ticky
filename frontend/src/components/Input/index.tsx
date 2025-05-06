@@ -37,8 +37,10 @@ function Input({
           {label}
         </label>
       )}
-      {helperText && <p className={styles.input_helper_text}>{helperText}</p>}
-      {error && <p className={styles.input_error}>{error}</p>}
+      {helperText && (
+        <span className={styles.input_helper_text}>{helperText}</span>
+      )}
+      {error && <span className={styles.input_error}>{error}</span>}
     </div>
   );
 }

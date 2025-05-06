@@ -10,6 +10,12 @@
   }
 }
 
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 html,
 body {
   font-family: var(--font-inter-sans);
@@ -19,14 +25,9 @@ body {
 
 body {
   display: block;
+  /* padding: 1.5rem; */
   color: var(--foreground);
   background: var(--background);
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
 }
 
 a {
