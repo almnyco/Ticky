@@ -12,6 +12,8 @@ import GearIcon from "/public/icons/gear.svg";
 import CheckIcon from "/public/icons/check.svg";
 import PersonIcon from "/public/icons/person.svg";
 import useSidebarContext from "@/src/hooks/useSidebarContext";
+import Button from "../Button";
+import AuthProvider from "@/src/providers/AuthProvider";
 
 const menu = [
   {
@@ -48,6 +50,7 @@ const menu = [
 
 function Sidebar() {
   const { isOpen } = useSidebarContext();
+  const { signout } = AuthProvider();
   const pathroute = usePathname();
 
   function getIsSamePath(menupath: string) {
@@ -84,6 +87,9 @@ function Sidebar() {
           ))}
         </ul>
       </nav>
+      <Button fullWidth onClick={() => signout()}>
+        Sign Out
+      </Button>
     </div>
   );
 }

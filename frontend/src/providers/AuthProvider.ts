@@ -4,9 +4,15 @@ import { redirect } from 'next/navigation';
 import { User } from '../contexts/AuthContext';
 import useAuthContext from '../hooks/useAuthContext'
 import { CreateUserSchema, SignInSchema } from "@/src/lib/user/schema";
+import { toast } from 'sonner';
 
 function AuthProvider() {
   const { setUser } = useAuthContext();
+
+  function handleError(error: string) {
+    toast.error(error)
+    return { error }
+  }
 
   async function signin(email: string, password: string) {
     const result = SignInSchema.safeParse({
@@ -25,7 +31,7 @@ function AuthProvider() {
       credentials: 'include'
     }).then((res) => res.json());
 
-    if (data?.error) return { error: data?.error }
+    if (data?.error) return handleError(data?.error)
 
     redirect("/home");
   };
@@ -45,13 +51,22 @@ function AuthProvider() {
     }).then((res) => res.json());
     console.log(data)
 
-    if (data?.error) return { error: data?.error }
+    if (data?.error) return handleError(data?.error)
 
     redirect("/signin");
   }
 
-  const signout = () => {
-    setUser({} as User)
+  const signout = async () => {
+
+    const data = await fetch('http://localhost:9000/api/signout', {
+      method: 'post',
+      credentials: 'include'
+    }).then((res) => res.json());
+
+    if (data?.error) return handleError(data?.error)
+
+    setUser({} as User);
+    redirect("/signin");
   }
 
   return { signin, signup, signout }

@@ -23,7 +23,10 @@ function SignIn() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<FormData>({ resolver: zodResolver(SignInSchema) });
+  } = useForm<FormData>({
+    resolver: zodResolver(SignInSchema),
+    mode: "all",
+  });
   const { signin } = AuthProvider();
 
   const [error, setError] = React.useState(undefined);
@@ -77,7 +80,7 @@ function SignIn() {
           {error && <p className={styles.form_error}>{error}</p>}
         </div>
         <div className={styles.form_submit}>
-          <Button type="submit" isLoading={isSubmitting}>
+          <Button type="submit" fullWidth isLoading={isSubmitting}>
             Sign In
           </Button>
           <p className={styles.form_text}>Ou</p>

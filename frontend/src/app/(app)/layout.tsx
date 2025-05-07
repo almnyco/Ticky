@@ -1,13 +1,19 @@
-import SidebarContextProvider from "@/src/contexts/SidebarContext";
+"use client";
+
+import Providers from "@/src/contexts/Providers";
 import AppLayout from "@/src/Layouts/AppLayout";
-export default async function Layout({
+import { Config } from "@/src/lib/toast.config";
+import { Toaster } from "sonner";
+
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <SidebarContextProvider>
+    <Providers>
       <AppLayout>{children}</AppLayout>
-    </SidebarContextProvider>
+      <Toaster {...Config} />
+    </Providers>
   );
 }

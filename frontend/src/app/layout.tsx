@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
+// import { Toaster } from "sonner";
 import "./globals.css";
 
 const interSans = Inter({
@@ -20,6 +21,7 @@ export default async function RootLayout({
   return (
     <html lang="pt">
       <body className={`${interSans.variable}`}>{children}</body>
+      {/* <Toaster /> */}
     </html>
   );
 }

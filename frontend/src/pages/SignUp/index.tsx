@@ -28,7 +28,7 @@ function SignUp() {
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(CreateUserBase),
-    mode: "onBlur",
+    mode: "all",
   });
   const [error, setError] = useState(undefined);
   const { signup } = AuthProvider();
@@ -104,7 +104,7 @@ function SignUp() {
           {error && <p className={styles.form_error}>{error}</p>}
         </div>
         <div className={styles.form_submit}>
-          <Button type="submit" isLoading={isSubmitting}>
+          <Button type="submit" fullWidth isLoading={isSubmitting}>
             Sign Up
           </Button>
           <p className={styles.form_text}>Ou</p>

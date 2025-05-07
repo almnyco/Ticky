@@ -111,6 +111,7 @@ export const signOut = async (req: Request, res: Response) => {
   }
 
   // Removing Token from cookies
+  res.clearCookie("accessToken");
   res.clearCookie("refreshToken");
   return res.status(200).json({ message: "Logout realizado com sucesso!" });
 };

@@ -11,7 +11,7 @@ function Header() {
     <div className={styles.header_wrapper}>
       <Logo />
       <div className={styles.header_actions}>
-        <Button>aaaa</Button>
+        <Button>Nova tarefa</Button>
         <Avatar />
       </div>
     </div>
