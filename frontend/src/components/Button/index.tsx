@@ -4,7 +4,7 @@ import styles from "./button.module.css";
 import Loading from "../Loading/index";
 import React from "react";
 
-type InputProps = {
+type ButtonProps = {
   isLoading?: boolean;
   fullWidth?: boolean;
 } & React.ComponentProps<"button">;
@@ -14,7 +14,7 @@ function Button({
   fullWidth = false,
   isLoading = false,
   ...props
-}: InputProps) {
+}: ButtonProps) {
   return (
     <button
       className={`${styles.button_wrapper} ${

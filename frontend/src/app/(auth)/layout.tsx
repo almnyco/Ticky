@@ -1,4 +1,5 @@
 "use client";
+
 import Providers from "@/src/contexts/Providers";
 import AuthLayout from "@/src/Layouts/AuthLayout";
 import { Config } from "@/src/lib/toast.config";

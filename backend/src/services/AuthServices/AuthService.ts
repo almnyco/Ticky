@@ -1,7 +1,8 @@
 import {
-  JWT_ACCESS_EXPIRES,
-  JWT_ALGORITHM,
   JWT_REFRESH_EXPIRES,
+  JWT_ACCESS_EXPIRES,
+  JWT_REFRESH_SECRET,
+  JWT_ALGORITHM,
   JWT_SECRET,
 } from "@/constants";
 import bcrypt from "bcrypt";
@@ -22,6 +23,7 @@ type TokenType = {
 export const signToken = (
   payload: SignToken,
   options: jwt.SignOptions = {},
+  isRefresh = false,
 ) => {
   const token = jwt.sign(
     {
@@ -29,9 +31,9 @@ export const signToken = (
       role: payload.role,
       name: payload.firstName,
     },
-    JWT_SECRET,
+    isRefresh ? JWT_REFRESH_SECRET : JWT_SECRET,
     {
-      expiresIn: JWT_ACCESS_EXPIRES,
+      expiresIn: isRefresh ? JWT_REFRESH_EXPIRES : JWT_ACCESS_EXPIRES,
       algorithm: JWT_ALGORITHM,
       ...options,
     },
@@ -41,11 +43,14 @@ export const signToken = (
 };
 
 // Function to verify JWT Token
-export const verifyToken = (data: TokenType) => {
+export const verifyToken = (data: TokenType, isRefresh = false) => {
   const token = data.token.replace("Bearer ", "");
 
   try {
-    const payload = jwt.verify(token, JWT_SECRET);
+    const payload = jwt.verify(
+      token,
+      isRefresh ? JWT_REFRESH_SECRET : JWT_SECRET,
+    );
 
     if (typeof payload === "string") return { error: "Invalid Token!" };
 
@@ -71,7 +76,7 @@ export const refreshToken = async (data: TokenType) => {
     if (!user) return { error: "Invalid Refresh Token!" };
 
     const newAccessToken = signToken(user);
-    const newRefreshToken = signToken(user, { expiresIn: JWT_REFRESH_EXPIRES });
+    const newRefreshToken = signToken(user, {}, true);
 
     return { newAccessToken, newRefreshToken };
   } catch (error) {

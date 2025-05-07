@@ -4,6 +4,7 @@ import styles from "./layout.module.css";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import Container from "../components/Container";
+// import Breadcrumbs from "../components/Breadcrumbs";
 import useLoadedApplication from "../hooks/useLoadedApplication";
 
 function AppLayout({ children }: { children: React.ReactNode }) {
@@ -15,6 +16,7 @@ function AppLayout({ children }: { children: React.ReactNode }) {
       <Sidebar />
       <Container>
         <Header />
+        {/* <Breadcrumbs /> */}
         {children}
       </Container>
     </div>

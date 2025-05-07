@@ -7,14 +7,14 @@
   border-radius: 6px;
   white-space: nowrap;
   transition: all 0.2s;
-  background-color: var(--primary-color);
-  border: 1px solid var(--primary-color);
+  background-color: rgb(var(--primary-color));
+  border: 1px solid rgb(var(--primary-color));
 }
 
 .button_wrapper:hover {
   cursor: pointer;
-  transform: scale(1.01);
-  border: 1px solid var(--border-color-primary);
+  transform: scale(1.025);
+  border: 1px solid rgb(var(--border-color-primary));
 }
 
 .button_full_width {

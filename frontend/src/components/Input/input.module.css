@@ -31,6 +31,7 @@
   font-size: 14px;
   color: #808080;
   padding-left: 4px;
+  -webkit-user-select: none;
   user-select: none;
   transition: all 0.2s;
 }

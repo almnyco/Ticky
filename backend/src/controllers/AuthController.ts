@@ -9,7 +9,6 @@ import {
   signToken,
   verifyToken,
 } from "@/services/AuthServices/AuthService";
-import { JWT_REFRESH_EXPIRES } from "@/constants";
 
 const cookieOptions = {
   maxAge: 1000 * 60 * 60,
@@ -78,7 +77,7 @@ const signIn = async (req: Request, res: Response) => {
     });
 
   const accessToken = signToken(exists);
-  const refreshToken = signToken(exists, { expiresIn: JWT_REFRESH_EXPIRES });
+  const refreshToken = signToken(exists, {}, true);
 
   res.cookie("accessToken", accessToken, {
     ...cookieOptions,
@@ -92,50 +91,53 @@ const signIn = async (req: Request, res: Response) => {
 };
 
 export const signOut = async (req: Request, res: Response) => {
-  const token = req.cookies.refreshToken;
+  const refreshToken = req.cookies.refreshToken;
 
-  if (!token) return res.status(403).json({ error: "Refresh Token not found" });
-
-  const verified = verifyToken({ token });
-
-  if (verified?.error) return res.status(401).json({ error: verified?.error });
+  // if (!token) return res.status(403).json({ error: "Refresh Token not found" });
+  if (!refreshToken) return res.sendStatus(204);
 
   // Check if user exists
   const exists = await ShowUserService({
-    where: { accessToken: token },
+    where: { accessToken: refreshToken },
     attr: ["id", "email", "role", "password", "firstName"],
   });
 
-  if (exists) {
-    await exists.update({ accessToken: null });
+  if (!exists) {
+    res.cookie("refreshToken", "", { maxAge: 0, httpOnly: true });
+    return res.sendStatus(204);
   }
 
+  const verified = verifyToken({ token: refreshToken }, true);
+
+  if (verified?.error) return res.status(401).json({ error: verified?.error });
+
+  await exists.update({ accessToken: null });
+
   // Removing Token from cookies
-  res.clearCookie("accessToken");
-  res.clearCookie("refreshToken");
+  res.cookie("accessToken", "", { maxAge: 0, httpOnly: true });
+  res.cookie("refreshToken", "", { maxAge: 0, httpOnly: true });
   return res.status(200).json({ message: "Logout realizado com sucesso!" });
 };
 
 const refresh = async (req: Request, res: Response) => {
-  const token = req.cookies.refreshToken;
+  let refreshToken = req.cookies.refreshToken;
 
-  if (!token)
+  if (!refreshToken)
     return res.status(403).json({ error: "Refresh Token not found." });
-
-  const verified = verifyToken({ token });
-
-  if (verified?.error) return res.status(401).json({ error: verified?.error });
 
   // Check if user exists
   const exists = await ShowUserService({
-    where: { accessToken: token },
+    where: { accessToken: refreshToken },
     attr: ["id", "email", "role", "password", "firstName"],
   });
 
   if (!exists) return res.status(401).json({ error: "Invalid Refresh Token." });
 
+  const verified = verifyToken({ token: refreshToken }, true);
+  if (verified?.error) return res.status(401).json({ error: verified?.error });
+
   const newAccessToken = signToken(exists);
-  const refreshToken = signToken(exists, { expiresIn: JWT_REFRESH_EXPIRES });
+  refreshToken = signToken(exists, {}, true);
 
   res.cookie("accessToken", newAccessToken, {
     ...cookieOptions,
