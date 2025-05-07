@@ -14,10 +14,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import AuthProvider from "@/src/providers/AuthProvider";
 
 interface FormData {
-  name: string;
   email: string;
-  lastname: string;
+  lastName: string;
   password: string;
+  firstName: string;
   password_repeat: string;
 }
 
@@ -38,6 +38,7 @@ function SignUp() {
 
     const res = await signup(data);
 
+    console.log(res);
     if (res?.error) {
       if (res?.error) setError(res?.error);
       return;
@@ -62,15 +63,15 @@ function SignUp() {
               type="text"
               label="Nome"
               placeholder="Insira seu nome"
-              error={errors.name?.message}
-              {...register("name", { required: true })}
+              error={errors.firstName?.message}
+              {...register("firstName", { required: true })}
             />
             <Input
-              type="lastname"
+              type="text"
               label="Sobrenome"
-              error={errors.lastname?.message}
+              error={errors.lastName?.message}
               placeholder="Insira seu sobrenome"
-              {...register("lastname", { required: true })}
+              {...register("lastName", { required: true })}
             />
           </div>
           <Input

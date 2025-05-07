@@ -6,12 +6,12 @@
   font-weight: 600;
   border-radius: 6px;
   transition: all 0.2s;
-  background-color: #9747ff;
-  border: 1px solid #9747ff;
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color);
 }
 
 .button_wrapper:hover {
   cursor: pointer;
   transform: scale(1.01);
-  border: 1px solid #af79ff;
+  border: 1px solid var(--border-color-primary);
 }

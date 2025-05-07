@@ -29,7 +29,7 @@ function Input({
         type="text"
         name={name}
         id={`input_${name}`}
-        className={styles.input}
+        className={`${styles.input} ${error && styles.input_error}`}
         {...props}
       />
       {label && (
@@ -40,7 +40,7 @@ function Input({
       {helperText && (
         <span className={styles.input_helper_text}>{helperText}</span>
       )}
-      {error && <span className={styles.input_error}>{error}</span>}
+      {error && <span className={styles.input_error_text}>{error}</span>}
     </div>
   );
 }

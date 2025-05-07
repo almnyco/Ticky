@@ -19,10 +19,10 @@
 
 .input:focus {
   outline: none;
-  border: 1px solid #ededed;
+  border: 1px solid var(--foreground);
 
   + .input_label {
-    color: #ededed;
+    color: var(--foreground);
   }
 }
 
@@ -31,6 +31,7 @@
   font-size: 14px;
   color: #808080;
   padding-left: 4px;
+  user-select: none;
   transition: all 0.2s;
 }
 
@@ -50,12 +51,23 @@
 }
 
 .input_error {
+  border: 1px solid var(--danger-color) !important;
+  + .input_label {
+    color: var(--danger-color) !important;
+  }
+
+  &::placeholder {
+    color: var(--danger-color) !important;
+  }
+}
+
+.input_error_text {
   order: 4;
   /* width: 100%; */
   width: calc(100% - 20px);
   font-size: 12px;
   font-weight: 600;
-  color: #ef4444;
+  color: var(--danger-color);
 }
 
 @media screen and (max-width: 584px) {

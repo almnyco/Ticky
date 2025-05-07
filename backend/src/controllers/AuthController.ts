@@ -54,7 +54,10 @@ const signUp = async (req: Request, res: Response) => {
 const signIn = async (req: Request, res: Response) => {
   const data = req.body;
 
-  const v = CredentialValidation(data, { validatePassword: true });
+  const v = CredentialValidation(data, {
+    validatePassword: true,
+    validateName: false,
+  });
   if (v?.error) return res.status(400).json(v);
 
   // Check if user exists

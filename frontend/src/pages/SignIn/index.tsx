@@ -40,7 +40,7 @@ function SignIn() {
   };
 
   return (
-    <div className={styles.form_wrapper}>
+    <div className={`${styles.form_wrapper} ${styles.form_wrapper_small}`}>
       <div className={styles.form_header}>
         <Logo />
         <div className={styles.form_text_header}>

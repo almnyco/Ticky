@@ -1,6 +1,7 @@
 import isEmail from "validator/lib/isEmail";
 
 type CredentialOptionsType = {
+  validateName?: boolean;
   validatePassword?: boolean;
   validatePasswordCreation?: boolean;
 };
@@ -8,7 +9,9 @@ type CredentialOptionsType = {
 type CredentialDataType = {
   email: string;
   password?: string;
-  passwordRepeat: string;
+  lastName?: string;
+  firstName?: string;
+  password_repeat: string;
 };
 
 type TaskDataType = {
@@ -23,18 +26,22 @@ export const CredentialValidation = (
     return { error: "Insert a existent and valid e-mail." };
   }
 
+  if (options?.validateName) {
+    if (!data?.firstName || !data?.lastName) {
+      return { error: "Insert or check your first name and last name." };
+    }
+  }
+
   if (options.validatePassword) {
     if (!data?.password) return { error: "Insert or check your password." };
-
-    return;
   }
 
   if (options.validatePasswordCreation) {
-    if (!data?.password || !data?.passwordRepeat) {
+    if (!data?.password || !data?.password_repeat) {
       return { error: "Insert or check your password." };
     }
 
-    if (data?.password !== data?.passwordRepeat) {
+    if (data?.password !== data?.password_repeat) {
       return { error: "Passwords do not match, please check and try again." };
     }
   }

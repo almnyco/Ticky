@@ -7,8 +7,8 @@ export const SignInSchema = z.object({
 
 export const CreateUserBase = z.object({
   email: z.string().trim().email({ message: 'Email is required' }),
-  name: z.string().trim().nonempty({ message: 'Name is required' }),
-  lastname: z.string().trim().nonempty({ message: 'Lastname is required' }),
+  firstName: z.string().trim().nonempty({ message: 'Name is required' }),
+  lastName: z.string().trim().nonempty({ message: 'LastName is required' }),
   password: z.string().trim().min(6, { message: "Password must be at least 6 characters long" }),
   password_repeat: z.string().trim().min(6, { message: "Password must be at least 6 characters long" }),
 })
@@ -20,7 +20,7 @@ export const CreateUserSchema = CreateUserBase.refine(data => {
 }, {
   message: 'Passwords do not match',
   path: ['password_repeat'] // Incorrect password field
-}).transform(({ email, name, lastname, password }) => ({ email, name, lastname, password, }))
+}).transform(({ email, firstName, lastName, password }) => ({ email, firstName, lastName, password, }))
 
 export const PublicUserSchema = z.object({
   email: z.string().trim().email({ message: 'Email is required' }),

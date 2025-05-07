@@ -38,7 +38,7 @@ const update = async (req: Request, res: Response) => {
   const data = req.body;
   const id = req.params?.id;
 
-  const hasPasswordUpdate = data?.password || data?.passwordRepeat;
+  const hasPasswordUpdate = data?.password || data?.password_repeat;
 
   const v = CredentialValidation(data, {
     validatePasswordCreation: hasPasswordUpdate,
