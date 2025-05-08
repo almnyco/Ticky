@@ -1,6 +1,6 @@
 .tooltip_wrapper {
-  border: 1px solid rgb(var(--border-color-primary)) !important;
-  background-color: rgb(var(--primary-color)) !important;
+  border: 1px solid rgb(var(--color-primary-light)) !important;
+  background-color: rgb(var(--color-primary)) !important;
   border-radius: 0.5rem !important;
   max-width: 250px !important;
 }

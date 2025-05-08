@@ -4,7 +4,7 @@ import React from "react";
 import Logo from "../Logo";
 import Link from "next/link";
 import styles from "./index.module.css";
-import SidebarMenu from "../SidebarMenu";
+import Menu from "./Menu";
 import { usePathname } from "next/navigation";
 import HomeIcon from "/public/icons/home.svg";
 import RepoIcon from "/public/icons/repo.svg";
@@ -75,7 +75,7 @@ function Sidebar() {
       />
       <div className={styles.sidebar_header}>
         <Logo className={styles.sidebar_header_logo} />
-        <SidebarMenu className={styles.header_sidebarmenu_hidden} />
+        <Menu className={styles.header_sidebarmenu_hidden} />
       </div>
       <nav className={styles.sidebar_menu_list}>
         <ul className={styles.sidebar_menu_list}>

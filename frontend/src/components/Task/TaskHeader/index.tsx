@@ -1,7 +1,7 @@
 import styles from "./taskheader.module.css";
 
 import CheckIcon from "/public/icons/check.svg";
-import Chip from "../Chip";
+import Chip from "../../Chip";
 import React from "react";
 
 function TaskHeader({}) {

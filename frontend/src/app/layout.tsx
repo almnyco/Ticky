@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 const interSans = Inter({
-  variable: "--font-inter-sans",
   subsets: ["latin"],
 });
 
@@ -20,7 +19,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="pt">
-      <body className={`${interSans.variable}`}>{children}</body>
+      <body className={interSans.className}>{children}</body>
       {/* <Toaster /> */}
     </html>
   );

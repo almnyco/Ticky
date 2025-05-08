@@ -15,8 +15,8 @@
   flex-direction: column;
   border-radius: 0.75rem;
   align-items: flex-start;
-  background-color: #171717;
   transition: all 0.4s ease;
+  background-color: var(--foreground);
   min-height: calc(100svh + 1.5rem * 2);
 }
 
@@ -93,7 +93,7 @@
   padding: 1rem;
   overflow: hidden;
   min-width: 46px;
-  font-size: 14px;
+  font-size: var(--text-sm);
   max-height: 46px;
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
@@ -103,7 +103,7 @@
   align-items: center;
   border-radius: 0.5rem;
   justify-content: flex-start;
-  background-color: #202020;
+  background-color: var(--onForeground);
 }
 
 .sidebar_menu_item:hover {
@@ -121,21 +121,21 @@
 }
 
 .sidebar_menu_icon svg path {
-  stroke: #8a8a8a;
+  stroke: var(--color-text-secondary);
 }
 
 .sidebar_menu_name {
   width: 100%;
-  color: #8a8a8a;
+  color: var(--color-text-secondary);
   white-space: nowrap;
 }
 
 .sidebar_menu_item_selected .sidebar_menu_name {
-  color: var(--text-primary);
+  color: var(--color-text-primary);
 }
 
 .sidebar_menu_item_selected .sidebar_menu_icon > svg path {
-  stroke: var(--text-primary);
+  stroke: var(--color-text-primary);
 }
 
 /* Sidebar responsive */

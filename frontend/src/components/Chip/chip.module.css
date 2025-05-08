@@ -14,12 +14,12 @@
   transition: all 0.2s;
   justify-content: center;
   padding-bottom: 0.25rem;
-  background-color: rgba(var(--primary-color), 0.25);
-  border: 2px solid rgb(var(--border-color-primary));
+  background-color: rgba(var(--color-primary), 0.25);
+  border: 2px solid rgb(var(--color-primary-light));
 
   & p {
-    font-size: 13px;
-    font-weight: 500;
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
     color: #cca4ff;
 
     overflow: hidden;

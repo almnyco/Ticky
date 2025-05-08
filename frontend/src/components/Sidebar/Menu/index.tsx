@@ -10,7 +10,7 @@ type SidebarMenuProps = {
   className?: string;
 };
 
-function SidebarMenu({ className }: SidebarMenuProps) {
+function Menu({ className }: SidebarMenuProps) {
   const { isOpen, handleOpenSidebar } = useSidebarContext();
 
   return (
@@ -22,4 +22,4 @@ function SidebarMenu({ className }: SidebarMenuProps) {
     </div>
   );
 }
-export default SidebarMenu;
+export default Menu;

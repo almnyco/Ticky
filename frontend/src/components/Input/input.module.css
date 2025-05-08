@@ -13,23 +13,23 @@
   padding: 0.9rem;
   border-radius: 6px;
   transition: all 0.2s;
-  border: 1px solid #808080;
+  border: 1px solid var(--color-border);
   background-color: transparent;
 }
 
 .input:focus {
   outline: none;
-  border: 1px solid var(--foreground);
+  border: 1px solid var(--color-border-light);
 
   + .input_label {
-    color: var(--foreground);
+    color: var(--color-border-light);
   }
 }
 
 .input_label {
   order: 1;
-  font-size: 14px;
-  color: #808080;
+  font-size: var(--text-sm);
+  color: var(--color-border);
   padding-left: 4px;
   -webkit-user-select: none;
   user-select: none;
@@ -46,19 +46,19 @@
 
 .input_helper_text {
   order: 3;
-  font-size: 12px;
-  font-weight: 600;
-  color: #808080;
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  color: var(--color-border);
 }
 
 .input_error {
-  border: 1px solid var(--danger-color) !important;
+  border: 1px solid var(--color-error) !important;
   + .input_label {
-    color: var(--danger-color) !important;
+    color: var(--color-error) !important;
   }
 
   &::placeholder {
-    color: var(--danger-color) !important;
+    color: var(--color-error) !important;
   }
 }
 
@@ -66,9 +66,9 @@
   order: 4;
   /* width: 100%; */
   width: calc(100% - 20px);
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--danger-color);
+  font-size: var(--text-xs);
+  font-weight: var(--font-semibold);
+  color: var(--color-error);
 }
 
 @media screen and (max-width: 584px) {
