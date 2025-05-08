@@ -103,6 +103,7 @@ export const signOut = async (req: Request, res: Response) => {
   });
 
   if (!exists) {
+    res.cookie("accessToken", "", { maxAge: 0, httpOnly: true });
     res.cookie("refreshToken", "", { maxAge: 0, httpOnly: true });
     return res.sendStatus(204);
   }

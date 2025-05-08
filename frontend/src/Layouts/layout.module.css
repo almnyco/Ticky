@@ -4,6 +4,6 @@
   top: 0;
   height: 100%;
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   /* min-height: calc(100svh - 8px * 2); */
 }

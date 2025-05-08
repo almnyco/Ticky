@@ -3,6 +3,9 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  border-radius: 0.75rem;
+  background-color: #171717;
+  padding: 1.5rem;
   justify-content: space-between;
   width: 100%;
   padding-top: 1.5rem;
@@ -15,3 +18,15 @@
   /* width: 100%; */
   flex-direction: row;
 }
+
+@media screen and (max-width: 640px) {
+  .header_wrapper {
+    justify-content: space-between;
+  }
+}
+
+/* @media screen and (min-width: 640px) {
+  .header_sidebarmenu_hidden {
+    display: none !important;
+  }
+} */

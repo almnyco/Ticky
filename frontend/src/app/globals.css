@@ -1,18 +1,33 @@
 :root {
-  --background: #ffffff;
+  /* Colors */
+  --background: #0f0f0f;
   --foreground: #171717;
+  --text-primary: #ededed;
   --border-color: #808080;
   --danger-color: #ef4444;
   --primary-color: 151, 71, 255;
   --border-color-primary: 175, 121, 255;
+
+  /* Sidebar */
+  --sidebar_opened_width: 275px;
+  --sidebar_mobile_width: 300px;
+  --sidebar_closed_width: 94px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0f0f0f;
+    --onBackground: #171717;
     --foreground: #ededed;
+    --onForeground: #ffffff;
   }
 }
+
+/* @media screen and (max-width: 425px) {
+  :root {
+    --sidebar_mobile_width: 300px;
+  }
+} */
 
 * {
   font-family: var(--font-inter-sans);

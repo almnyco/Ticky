@@ -49,6 +49,7 @@ function AuthProvider() {
       },
       credentials: 'include'
     }).then((res) => res.json());
+    console.log(data)
 
     if (data?.error) return handleError(data?.error)
 

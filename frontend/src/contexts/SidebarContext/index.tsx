@@ -1,5 +1,6 @@
 "use client";
 
+import useDimensions from "@/src/hooks/useDimensions";
 import React, {
   createContext,
   useCallback,
@@ -27,6 +28,15 @@ function SidebarContextProvider({ children }: SidebarContextProviderProps) {
     }
     return false;
   });
+
+  const { width } = useDimensions();
+
+  useEffect(() => {
+    if (isOpen && width <= 640) {
+      setIsOpen(false);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     localStorage.setItem("sidebar-isopen", String(isOpen));

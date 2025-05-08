@@ -1,7 +1,7 @@
 .button_wrapper {
   margin: 0;
   border: 0;
-  padding: 0.9rem;
+  padding: 1rem;
   font-weight: 600;
   overflow: hidden;
   border-radius: 6px;
@@ -20,4 +20,9 @@
 .button_full_width {
   width: 100% !important;
   min-width: 100% !important;
+}
+
+.button_small {
+  padding: 0.6rem;
+  font-size: 12px;
 }

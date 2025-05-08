@@ -1,7 +1,7 @@
 .sidebar_menu {
   display: flex;
-  min-width: 42px;
-  min-height: 42px;
+  min-width: 46px;
+  min-height: 46px;
   align-items: center;
   border-radius: 12px;
   transition: all 0.4s;

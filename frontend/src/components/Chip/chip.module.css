@@ -30,6 +30,7 @@
 
 .chip_wrapper:hover {
   cursor: pointer;
+  z-index: 1;
   transform: scale(1.025);
 }
 

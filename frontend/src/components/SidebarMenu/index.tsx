@@ -6,11 +6,18 @@ import MenuOpenedIcon from "/public/icons/menu-opened.svg";
 import MenuClosedIcon from "/public/icons/menu-closed.svg";
 import useSidebarContext from "@/src/hooks/useSidebarContext";
 
-function SidebarMenu() {
+type SidebarMenuProps = {
+  className?: string;
+};
+
+function SidebarMenu({ className }: SidebarMenuProps) {
   const { isOpen, handleOpenSidebar } = useSidebarContext();
 
   return (
-    <div className={styles.sidebar_menu} onClick={handleOpenSidebar}>
+    <div
+      className={`${styles.sidebar_menu} ${className}`}
+      onClick={handleOpenSidebar}
+    >
       {!isOpen ? <MenuClosedIcon /> : <MenuOpenedIcon />}
     </div>
   );

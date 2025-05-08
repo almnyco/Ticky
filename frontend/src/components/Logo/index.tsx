@@ -18,8 +18,8 @@ function Logo({ showTitle = true, showIcon = true, ...props }: LogoType) {
         <Image
           src="/favicon.ico"
           alt="Next.js logo"
-          width={42}
-          height={42}
+          width={46}
+          height={46}
           priority
         />
       )}

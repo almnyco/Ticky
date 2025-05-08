@@ -27,7 +27,7 @@ function Chip({
   tooltip = false,
   fullWidth = false,
   tooltipContent,
-  icon = { src: <></>, align: "left" },
+  icon,
   ...props
 }: ChipProps) {
   const tooltipOptions =
@@ -48,7 +48,7 @@ function Chip({
         id={`chip_component_${id}`}
         {...tooltipOptions}
       >
-        {icon?.src && icon?.align !== "right" && (
+        {icon?.src && icon?.align === "left" && (
           <div className={styles.chip_icon}>{icon.src}</div>
         )}
 

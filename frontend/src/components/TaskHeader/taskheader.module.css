@@ -1,0 +1,9 @@
+.task_header_wrapper {
+  gap: 0.5rem;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: row;
+}

@@ -1,17 +1,17 @@
 "use client";
 
 import React from "react";
-import Logo from "../Logo";
 import Avatar from "../Avatar";
-import styles from "./header.module.css";
 import Button from "../Button";
+import styles from "./header.module.css";
+import SidebarMenu from "../SidebarMenu";
 
 function Header() {
   return (
     <div className={styles.header_wrapper}>
-      <Logo />
+      <SidebarMenu className={styles.header_sidebarmenu_hidden} />
       <div className={styles.header_actions}>
-        <Button>Nova tarefa</Button>
+        <Button size="small">Nova tarefa</Button>
         <Avatar />
       </div>
     </div>

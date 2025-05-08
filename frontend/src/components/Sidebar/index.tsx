@@ -49,7 +49,7 @@ const menu = [
 ];
 
 function Sidebar() {
-  const { isOpen } = useSidebarContext();
+  const { isOpen, handleOpenSidebar } = useSidebarContext();
   const { signout } = AuthProvider();
   const pathroute = usePathname();
 
@@ -60,15 +60,22 @@ function Sidebar() {
     return isSamePath;
   }
 
+  console.log(isOpen);
   return (
     <div
       className={`${styles.sidebar_wrapper} ${
         !isOpen && styles.sidebar_wrapper_closed
       } `}
     >
+      <div
+        className={`${styles.sidebar_wrapper_backdrop} ${
+          isOpen && styles.sidebar_wrapper_backdrop_actived
+        }`}
+        onClick={() => handleOpenSidebar()}
+      />
       <div className={styles.sidebar_header}>
         <Logo className={styles.sidebar_header_logo} />
-        <SidebarMenu />
+        <SidebarMenu className={styles.header_sidebarmenu_hidden} />
       </div>
       <nav className={styles.sidebar_menu_list}>
         <ul className={styles.sidebar_menu_list}>
@@ -86,10 +93,10 @@ function Sidebar() {
             </li>
           ))}
         </ul>
+        <Button fullWidth onClick={() => signout()}>
+          Sign Out
+        </Button>
       </nav>
-      <Button fullWidth onClick={() => signout()}>
-        Sign Out
-      </Button>
     </div>
   );
 }
