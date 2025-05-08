@@ -6,7 +6,7 @@ import React, { Fragment } from "react";
 
 type ChipIconProps = {
   src: string | React.ReactNode | React.JSX.Element;
-  align?: "left" | "right";
+  align: "left" | "right";
 };
 
 type ChipTooltipProps = { tooltip?: boolean; tooltipContent?: string };
